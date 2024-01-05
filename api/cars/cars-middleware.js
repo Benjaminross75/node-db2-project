@@ -5,16 +5,16 @@ const checkCarId = async (req, res, next) => {
   try{
     const car = await Car.getById(req.params.id)
     if(!car){
-      next({status:404, message:'not found'})
+      next({status:404, message:`car with id ${req.params.id} is not found`})
     } else{
-      req.car = car
+      //req.car = car
       next()
     }
   }
   catch(err){
     next(err)
   }
-  next()
+
 }
 
 const checkCarPayload = (req, res, next) => {

@@ -17,7 +17,17 @@ router.get('/', async (req, res, next)=>{
    }
 })
 router.get('/:id', checkCarId, async (req, res, next)=>{
-    res.json(req.car)
+    try{
+        const cars = await Car.getById(req.params.id)
+        if(!cars){
+            next({status:404, message: `car with id ${req.params.id} is not found`})
+        } else{
+            res.json(cars)
+        }
+       }
+       catch(err){
+        next(err)
+       }
 })
 router.post('/',
 checkCarPayload,
