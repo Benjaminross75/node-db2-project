@@ -1,11 +1,11 @@
 const express = require("express")
-
+const carRouter = require('./cars/cars-router')
 const server = express()
 
 // DO YOUR MAGIC
 server.use(express.json())
 
-
+server.use('/api/cars', carRouter)
 
 server.use('*',(req, res, next)=>{
 next({status:404, message: 'not found'})
